@@ -1,0 +1,49 @@
+//Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Задаем размеры двумерного массива
+        int m = 3; // количество строк
+        int n = 4; // количество столбцов
+
+        // Создаем экземпляр генератора случайных чисел
+        Random random = new Random();
+
+        // Создаем двумерный массив с заданными размерами
+        double[,] array = new double[m, n];
+
+        // Заполняем массив случайными числами
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                array[i, j] = random.NextDouble() * 100; // Генерируем случайное число от 0 до 100
+            }
+        }
+
+        // Выводим исходный массив
+        Console.WriteLine("Исходный массив:");
+        PrintArray(array);
+
+        // Другие операции с двумерным массивом...
+    }
+
+    static void PrintArray(double[,] array)
+    {
+        int m = array.GetLength(0);
+        int n = array.GetLength(1);
+
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                Console.Write(array[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
