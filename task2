@@ -1,0 +1,49 @@
+//Напишите программу, которая на вход принимает значение элемента в двумерном массиве, и возвращает позицию этого элемента или же указание, что такого элемента нет.
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Создаем двумерный массив с данными
+        int[,] array = {
+            { 1, 2, 3 },
+            { 4, 5, 6 },
+            { 7, 8, 9 }
+        };
+
+        // Получаем значение от пользователя
+        Console.Write("Введите значение элемента: ");
+        int value = int.Parse(Console.ReadLine());
+
+        // Ищем позицию элемента в массиве
+        int row = -1;
+        int column = -1;
+        int m = array.GetLength(0);
+        int n = array.GetLength(1);
+
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (array[i, j] == value)
+                {
+                    row = i;
+                    column = j;
+                    break;
+                }
+            }
+        }
+
+        // Выводим результат
+        if (row != -1 && column != -1)
+        {
+            Console.WriteLine($"Позиция элемента {value}: ({row}, {column})");
+        }
+        else
+        {
+            Console.WriteLine($"Элемента {value} нет в массиве");
+        }
+    }
+}
