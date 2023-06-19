@@ -1,0 +1,76 @@
+//Сгенерировать массив случайных целых чисел размерностью m*n (размерность вводим с клавиатуры) , причем чтоб количество элементов было четное. Вывести на экран красивенько таблицей. Перемешать случайным образом элементы массива, причем чтобы каждый элемент гарантированно и только один раз переместился на другое место и выполнить перемешивание за m*n / 2 итераций. То есть если массив три на четыре, то надо выполнить за 6 итераций. И далее в конце опять вывести на экран как таблицу.
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Ввод размерности массива
+        Console.Write("Введите количество строк: ");
+        int rows = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите количество столбцов: ");
+        int columns = int.Parse(Console.ReadLine());
+
+        // Проверка на четность количества элементов
+        if ((rows * columns) % 2 != 0)
+        {
+            Console.WriteLine("Количество элементов должно быть четным!");
+            return;
+        }
+
+        // Создание и заполнение двумерного массива случайными числами
+        int[,] array = new int[rows, columns];
+        Random random = new Random();
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                array[i, j] = random.Next(1, 100);
+            }
+        }
+
+        // Вывод исходного массива в виде таблицы
+        Console.WriteLine("Исходный массив:");
+        PrintArray(array);
+
+        // Перемешивание элементов массива
+        int iterations = rows * columns / 2;
+
+        for (int i = 0; i < iterations; i++)
+        {
+            // Генерация случайных индексов элементов для перемещения
+            int row1 = random.Next(0, rows);
+            int col1 = random.Next(0, columns);
+            int row2 = random.Next(0, rows);
+            int col2 = random.Next(0, columns);
+
+            // Перемещение элементов
+            int temp = array[row1, col1];
+            array[row1, col1] = array[row2, col2];
+            array[row2, col2] = temp;
+        }
+
+        // Вывод перемешанного массива в виде таблицы
+        Console.WriteLine("Перемешанный массив:");
+        PrintArray(array);
+    }
+
+    // Метод для вывода массива в виде таблицы
+    static void PrintArray(int[,] array)
+    {
+        int rows = array.GetLength(0);
+        int columns = array.GetLength(1);
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                Console.Write(array[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
