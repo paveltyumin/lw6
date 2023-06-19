@@ -1,0 +1,62 @@
+//Задайте двумерный массив из целых чисел. Количество строк и столбцов задается с клавиатуры. Отсортировать элементы по возрастанию слева направо и сверху вниз.
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Ввод количества строк и столбцов
+        Console.Write("Введите количество строк: ");
+        int rows = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите количество столбцов: ");
+        int columns = int.Parse(Console.ReadLine());
+
+        // Создание и заполнение двумерного массива
+        int[,] array = new int[rows, columns];
+
+        Console.WriteLine("Введите элементы массива:");
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                Console.Write($"Элемент [{i}, {j}]: ");
+                array[i, j] = int.Parse(Console.ReadLine());
+            }
+        }
+
+        // Сортировка элементов массива
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                for (int k = 0; k < rows; k++)
+                {
+                    for (int l = 0; l < columns; l++)
+                    {
+                        if (array[i, j] < array[k, l])
+                        {
+                            int temp = array[i, j];
+                            array[i, j] = array[k, l];
+                            array[k, l] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Вывод отсортированного массива
+        Console.WriteLine("Отсортированный массив:");
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                Console.Write(array[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
